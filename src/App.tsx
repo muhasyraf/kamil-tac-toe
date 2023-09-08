@@ -46,9 +46,9 @@ function App() {
     for (let index = 0; index < WINNING_CONDITION.length; index++) {
       const winCombo = WINNING_CONDITION[index];
 
-      let a = gamePlay[winCombo[0]];
-      let b = gamePlay[winCombo[1]];
-      let c = gamePlay[winCombo[2]];
+      const a = gamePlay[winCombo[0]];
+      const b = gamePlay[winCombo[1]];
+      const c = gamePlay[winCombo[2]];
 
       if ([a, b, c].includes("")) {
         continue;

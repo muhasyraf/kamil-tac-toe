@@ -2,7 +2,15 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import Board from "./Board";
 
+type Scores = {
+  [key: string]: number;
+};
+
 const GAME_STARTER = ["", "", "", "", "", "", "", "", ""];
+const SCORES_STARTER: Scores = {
+  X: 0,
+  O: 0,
+};
 const WINNING_CONDITION = [
   [0, 1, 2],
   [3, 4, 5],
@@ -17,6 +25,7 @@ const WINNING_CONDITION = [
 function App() {
   const [gamePlay, setGamePlay] = useState(GAME_STARTER);
   const [currentPlayer, setCurrentPlayer] = useState("X");
+  const [scores, setScores] = useState(SCORES_STARTER);
 
   const newTurn = () => {
     setCurrentPlayer(currentPlayer == "X" ? "O" : "X");
@@ -32,6 +41,10 @@ function App() {
     window.alert(
       `Grats dawg u killing it, all the praise due to ${currentPlayer}`
     );
+    const currentPlayerScore = scores[currentPlayer] + 1;
+    const newScores = { ...scores };
+    newScores[currentPlayer] = currentPlayerScore;
+    setScores(newScores);
     resetGame();
   };
 
@@ -85,19 +98,43 @@ function App() {
     setGamePlay(newAct);
   };
 
+  const playerColor =
+    currentPlayer === "X" ? "text-lime-300" : "text-fuchsia-300";
+
   return (
-    <div className="h-full p-4 bg-cyan-950 text-cyan-100" id="bground">
-      <h1 className="text-5xl text-center font-display">Miltactoe</h1>
-      <div className="mt-8 grid grid-cols-3 gap-3 mx-auto w-96">
-        {gamePlay.map((player, playerKey) => (
-          <Board
-            key={playerKey}
-            onClick={handleBoardClick}
-            {...{ playerKey, player }}
-          />
-        ))}
+    <div
+      className="h-full sm:h-screen p-4 bg-cyan-950 text-cyan-100 flex flex-col items-center sm:grid sm:grid-rows-1 sm:grid-cols-3 gap-2"
+      id="bground"
+    >
+      <div className="sm:justify-self-center text-3xl flex flex-col justify-center">
+        <h3 className="font-display">Scores</h3>
+        <p>
+          <span className="text-lime-300 font-display">X:</span>{" "}
+          <span>{scores["X"]}</span>
+        </p>
+        <p>
+          <span className="text-fuchsia-300 font-display">O:</span>{" "}
+          <span>{scores["O"]}</span>
+        </p>
       </div>
-      <div>Scores</div>
+      <div className="sm:col-span-2 sm:justify-self-start">
+        <h1 className="text-5xl text-center font-display">Miltactoe</h1>
+        <div className="mt-8 grid grid-cols-3 gap-3 mx-auto w-96">
+          {gamePlay.map((player, playerKey) => (
+            <Board
+              key={playerKey}
+              onClick={handleBoardClick}
+              {...{ playerKey, player }}
+            />
+          ))}
+        </div>
+        <p className="mt-2 font-display text-center text-3xl">
+          Next Player:{" "}
+          <span className={`font-display ${playerColor} `}>
+            {currentPlayer}
+          </span>
+        </p>
+      </div>
     </div>
   );
 }

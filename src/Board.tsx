@@ -11,7 +11,7 @@ function Board({ playerKey, player, onClick }: Props) {
   return (
     <div
       data-square={playerKey}
-      className={`h-36 border-solid border-2 border-slate-200 font-display text-8xl text-center flex justify-center items-center cursor-pointer ${playerHover}`}
+      className={`h-24 sm:h-36 border-solid border-2 border-slate-200 font-display text-8xl text-center flex justify-center items-center cursor-pointer ${playerHover}`}
       {...{ onClick }}
     >
       <span

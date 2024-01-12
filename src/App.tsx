@@ -111,10 +111,10 @@ function App() {
 
   return (
     <div
-      className="h-full sm:h-screen p-4 text-fun-pink-light flex flex-col items-center sm:grid sm:grid-rows-1 sm:grid-cols-3 gap-2"
+      className="h-full sm:h-screen p-2 sm:p-4 text-fun-pink-light flex flex-col items-center sm:grid sm:grid-rows-1 sm:grid-cols-3 gap-2"
       id="bground"
     >
-      <div className="sm:justify-self-center text-2xl sm:text-3xl max-sm:items-center grid grid-cols-2 sm:flex sm:flex-col sm:gap-2 justify-center max-sm:order-last">
+      <div className="sm:justify-self-center text-2xl sm:text-3xl max-sm:p-2 max-sm:items-center grid grid-cols-2 sm:flex sm:flex-col sm:gap-2 justify-center max-sm:order-last">
         <div>
           <h3 className="font-display">Scores</h3>
           <p>
@@ -151,7 +151,7 @@ function App() {
             Asyraf
           </a>
         </p>
-        <div className="mt-8 grid grid-cols-3 gap-3 mx-auto w-96">
+        <div className="mt-8 grid grid-cols-3 gap-3 mx-auto w-72 sm:w-96">
           {gamePlay.map((player, playerKey) => (
             <Board
               key={playerKey}
